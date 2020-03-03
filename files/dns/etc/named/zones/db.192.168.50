@@ -1,0 +1,25 @@
+$TTL 1h
+@      IN      SOA    ns1.kubic.dcloud. admin.kubic.dcloud. (
+                         5          ; Serial
+                         1h         ; Refresh
+                         1d         ; Retry
+                         4W         ; Expire
+                         1d )       ; Negative Cache TTL
+
+; name servers - NS records
+      IN      NS      ns1.kubic.dcloud.
+
+; PTR Records
+2   IN      PTR     ns1.kubic.dcloud.    ; 192.168.50.2
+2   IN      PTR     dns.kubic.dcloud.   ; 192.168.50.2
+10   IN      PTR     auto.kubic.dcloud.    ; 192.168.50.10
+20   IN      PTR     ci.kubic.dcloud.    ; 192.168.50.20
+31   IN      PTR     etcd1.kubic.dcloud.    ; 192.168.50.31
+32   IN      PTR     etcd2.kubic.dcloud.    ; 192.168.50.32
+33   IN      PTR     etcd3.kubic.dcloud.    ; 192.168.50.33
+41   IN      PTR     ctrl1.kubic.dcloud.    ; 192.168.50.41
+42   IN      PTR     ctrl2.kubic.dcloud.    ; 192.168.50.42
+43   IN      PTR     ctrl3.kubic.dcloud.    ; 192.168.50.43
+51   IN      PTR     node1.kubic.dcloud.    ; 192.168.50.51
+52   IN      PTR     node2.kubic.dcloud.    ; 192.168.50.52
+53   IN      PTR     node3.kubic.dcloud.    ; 192.168.50.53

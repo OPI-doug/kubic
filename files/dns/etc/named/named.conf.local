@@ -1,0 +1,9 @@
+zone "kubic.dcloud" {
+  type master;
+  file "/etc/named/zones/db.kubic.dcloud"; #zone file path
+};
+
+zone "50.168.192.in-addr.arpa" {
+  type master;
+  file "/etc/named/zones/db.192.168.50";  #subnet
+};
