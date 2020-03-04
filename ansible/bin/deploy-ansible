@@ -13,4 +13,6 @@ echo Updating the ansible deployment
 cp -v ${DEPLOY_ANSIBLE_HOME}/config/ansible.cfg /etc/ansible/ansible.cfg
 cp -rv ${DEPLOY_ANSIBLE_HOME}/group_vars /etc/ansible/
 
-
+chmod 644 /etc/ansible/ansible.cfg
+chmod 755 /etc/ansible/group_vars
+chmod 644 /etc/ansible/group_vars/*
