@@ -84,6 +84,7 @@ Vagrant.configure("2") do |config|
     # dnf upgrade -y
     dnf install -y \
       bind-utils \
+      git \
       jq \
       net-tools \
       vim
