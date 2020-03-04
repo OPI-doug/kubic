@@ -1,0 +1,14 @@
+#! /bin/bash
+
+DEPLOY_ANSIBLE_HOME=/home/vagrant/kubic/ansible
+
+if [ ! -d $DEPLOY_ANSIBLE_HOME ]
+then
+  echo No DEPLOY_ANSIBLE_HOME
+  exit 1
+fi
+
+echo Updating the ansible deployment
+
+cp $DEPLOY_ANSIBLE_HOME/config/ansible.cfg /etc/ansible/ansible.cfg
+
