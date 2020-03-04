@@ -57,6 +57,10 @@ Vagrant.configure("2") do |config|
       su -c 'pip3 install --user ansible' vagrant
       cp -rv /vagrant/files/common/etc / && echo "files copied"
       cp -rv /vagrant/files/auto/etc / && echo "auto files copied"
+      su -c 'git clone https://github.com/OPI-doug/kubic.git /home/vagrant/kubic' vagrant
+      su -c 'git config --global user.email "doug.hernandez@objectpartners.com"' vagrant
+      su -c 'git config --global user.name "Yeti"' vagrant
+      bash /home/vagrant/kubic/ansible/bin/deploy-ansible
     SHELL
   end
   # END AUTO
@@ -66,7 +70,7 @@ Vagrant.configure("2") do |config|
 
     auto.vm.box = "centos/8"
     auto.vm.provider "virtualbox" do |vb|
-      vb.memory = "1024"
+      vb.memory = "2048"
     end
 
     auto.vm.network "private_network", ip: "192.168.50.20"
@@ -91,10 +95,16 @@ Vagrant.configure("2") do |config|
     useradd -s /bin/bash golem
     echo golemwerd | passwd --stdin golem
     mkdir /home/golem/.ssh
-    cp -v /vagrant/files/common/golem/ssh-keys/* /home/golem/.ssh && echo "files copied"
+    mkdir /home/vagrant/.ssh
+    cp -v /vagrant/files/common/golem/ssh-keys/* /home/golem/.ssh && echo "golem user ssh files copied"
+    cp -v /vagrant/files/common/golem/ssh-keys/* /home/vagrant/.ssh && echo "vagrant user ssh files copied"
     chown -R golem:golem /home/golem/.ssh
     chmod 700 /home/golem/.ssh
     chmod 600 /home/golem/.ssh/id_rsa*
+    su -c 'cp /home/golem/.ssh/id_rsa.pub /home/golem/.ssh/authorized_keys' golem
+    chown -R vagrant:vagrant /home/vagrant/.ssh
+    chmod 700 /home/vagrant/.ssh
+    chmod 600 /home/vagrant/.ssh/id_rsa*
   SHELL
 
   # Create a forwarded port mapping which allows access to a specific port
