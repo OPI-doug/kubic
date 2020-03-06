@@ -55,6 +55,7 @@ Vagrant.configure("2") do |config|
       dnf install -y python3
       dnf install -y python3-pip
       su -c 'pip3 install --user ansible' vagrant
+      su -c 'pip3 install --user hvac' vagrant
       cp -rv /vagrant/files/common/etc / && echo "files copied"
       cp -rv /vagrant/files/auto/etc / && echo "auto files copied"
       su -c 'git clone https://github.com/OPI-doug/kubic.git /home/vagrant/kubic' vagrant
@@ -105,6 +106,8 @@ Vagrant.configure("2") do |config|
     chown -R vagrant:vagrant /home/vagrant/.ssh
     chmod 700 /home/vagrant/.ssh
     chmod 600 /home/vagrant/.ssh/id_rsa*
+    chmod 750 /etc/sudoers.d/
+    chmod 440 /etc/sudoers.d/golem
   SHELL
 
   # Create a forwarded port mapping which allows access to a specific port
