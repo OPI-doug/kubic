@@ -1,0 +1,7 @@
+---
+- name: Update the dnf cache
+  dnf:
+    update_cache: yes
+    name: "*"
+    state: latest
+

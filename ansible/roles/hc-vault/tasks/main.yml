@@ -1,0 +1,55 @@
+---
+- name: Creating vault user group
+  group:
+    name: "{{ vault_group }}"
+  become: yes
+
+- name: Creating vault user
+  user:
+    name: "{{ vault_user }}"
+    group: "{{ vault_group }}"
+    system: yes
+    shell: "/sbin/nologin"
+    comment: "vault nologin User"
+    createhome: "no"
+    state: present
+    become: yes
+
+- name: Install zip
+  dnf:
+    name: zip  
+    state: latest
+    become: yes
+
+- name: Download binary
+  get_url:
+    url: https://releases.hashicorp.com/vault/1.3.2/vault_1.3.2_linux_amd64.zip
+    dest: /tmp/vault_1.3.2_linux_amd64.zip
+    owner: "{{ vault_user }}"
+    group: "{{ vault_group }}"
+    mode: 0755
+    checksum: 6e72132de0421b74d909f50be1823fe57182694c4268ba9a38c31213d9497ec9
+  register: vault_download
+
+- name: Unzip vault
+  unarchive:
+    src: "{{ vault_download.dest }}"
+    dest: /usr/local/bin
+    copy: no
+    owner: "{{ vault_user }}"
+    group: "{{ vault_group }}"
+    mode: 0755 
+  register: vault_unzip
+  become: yes
+
+- name: examine vault_unzip
+  debug: 
+    var: vault_unzip
+
+- name: turn on cap_ipc_lock
+  capabilities:
+    capability: cap_ipc_lock+ep
+    path: /usr/local/bin/vault
+    state: present
+  become: yes
+  

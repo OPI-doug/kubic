@@ -1,0 +1,8 @@
+---
+- hosts: ci
+  vars:
+    version: ci-1.0.0
+
+  roles:
+  - common
+  - hc-vault

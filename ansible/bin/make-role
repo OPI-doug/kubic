@@ -1,0 +1,16 @@
+#! /bin/bash
+
+ROLE=${1?:"$0 <rolename>"}
+echo "Creating role $ROLE"
+
+mkdir roles/$ROLE
+mkdir roles/$ROLE/tasks
+mkdir roles/$ROLE/handlers
+mkdir roles/$ROLE/templates
+mkdir roles/$ROLE/files
+mkdir roles/$ROLE/vars
+mkdir roles/$ROLE/default
+mkdir roles/$ROLE/meta
+mkdir roles/$ROLE/library
+mkdir roles/$ROLE/module_utils
+mkdir roles/$ROLE/lookup_plugins
